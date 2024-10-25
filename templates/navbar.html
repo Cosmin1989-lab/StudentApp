@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Django Project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Intro
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'lcars' %}">List of cars</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lbooks' %}">List of books</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Student
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'create-student' %}">Create a new student</a></li>
+                        <li><a class="dropdown-item" href="{% url 'list-students' %}">List of students</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Trainer
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'create-trainer' %}">Create a new trainer</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lbooks' %}">List of books</a></li>
+                    </ul>
+                </li>
+             
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Feedback
+                    </a>
+                    <ul class="dropdown-menu">
+                        {#                   <li><a class="dropdown-item" href="{% url 'create-feedback' %}">Create a new feedback</a></li>#}
+                        {#                   <li><a class="dropdown-item" href="{% url 'list-of-feedbacks' %}">List of feedbacks</a></li>#}
+                    </ul>
+                </li>
+            {%  endif %}   
+            </ul>
+            {% if user.is_authenticated %}
+                <div>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-secondary">Logout, {{ user.username }}</button>
+                    </form>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+                    <a href="{% url 'create-user' %}" class="btn btn-outline-secondary">Signup</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>

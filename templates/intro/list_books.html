@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} List of books {% endblock %}
+
+
+{% block content %}
+         <table class="table table-danger table-striped">
+        <thead>
+            <tr>
+                <th>Name of book</th>
+                <th>It's a best seller?</th>
+                <th>Year</th>
+                <th>Category of book</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in all_books %}
+                <tr>
+                    <td>{{ book.name_of_book }}</td>
+                    <td>{{ book.best_seller }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>{{ book.category }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

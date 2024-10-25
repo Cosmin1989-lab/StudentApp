@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Details {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <br><br>
+                <div class="card text-center">
+                    <div class="card-header">
+                        View details
+                    </div>
+                    <div class="card-body">
+                        {% if student.profile %}
+                            <img src="{{ student.profile.url }}" alt="Profile Image" width="120" height="120">
+                        {% elif student.gender == 'male' %}
+                            <img src="{% static 'img.png' %}" alt="Profile Image" width="120" height="120">
+                        {% elif student.gender == 'female' %}
+                            <img src="{% static 'img_1.png' %}" alt="Profile Image" width="120" height="120">
+                        {% else %}
+                            No image
+                        {% endif %}
+                    <br><br>
+                        <h5 class="card-title">{{ student }}</h5>
+                        <p class="card-text">Email address :{{ student.email }}</p>
+                        <p class="card-text">Trainer: {% if student.trainer %}{{ student.trainer }}{% else %}No trainer{% endif %}</p>
+                        <p class="card-text">Course name: {% if student.trainer.course %} {{ student.trainer.course }} {% else %} No course {% endif %}</p>
+                        <a href="{% url 'list-students' %}" class="btn btn-primary">Back</a>
+                    </div>
+                    <div class="card-footer text-body-secondary">
+                        Start date: {{ student.start_date|date:"d-m-Y" }}/ End date: {{ student.end_date|date:"d-m-Y" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
